@@ -313,7 +313,7 @@ class BroadcastTheMessage extends Command {
                     console.log("+ New subscription notice not sent because there is no one yet to receive the notice.");
                     return;
                 }
-                let theMessage = "From: " + senderName + ", " + this.body;
+                let theMessage = "[From: " + senderName + "] " + this.body;
                 console.log("+ The message |" + theMessage + "| " + " Sent to: " + sendNameList);
                 notify.notifications.create({body: theMessage, toBinding: sendList})
                 .then((response) => {
