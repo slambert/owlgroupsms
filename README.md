@@ -1,7 +1,8 @@
 # Owl Group SMS Application
 
-This is the documented steps to configure the Group SMS application using the Twilio Console.
-After, is documentation for developers.
+Below are the documented steps to configure the Group SMS application using the Twilio Console.
+
+After is documentation for developers.
 
 This application setup steps, and program, are variations of the Broadcast setup in the blog:
 [How To: Set Up SMS Broadcasts in Five Minutes](https://www.twilio.com/blog/2017/12/how-to-set-up-sms-broadcasts-in-five-minutes.html)
@@ -15,7 +16,7 @@ The Node.JS programs require the [Twilio Node.JS Helper Library](https://www.twi
 ## Configure Group SMS
 
 1. Open a Twilio account to manage your Twilio resources.
-For Group SMS, you are required you to [upgrade your account](https://support.twilio.com/hc/en-us/articles/223183208-Upgrading-to-a-paid-Twilio-Account).
+**For Group SMS, you are required you to [upgrade your account](https://support.twilio.com/hc/en-us/articles/223183208-Upgrading-to-a-paid-Twilio-Account)**.
 
 [https://www.twilio.com](https://www.twilio.com)
 
@@ -28,9 +29,9 @@ In the following steps, I use +12223331234 as the example phone number.
 
 3. Create a Function. It will run the Group SMS application.
 
-[https://www.twilio.com/console/runtime/functions/manage](https://www.twilio.com/console/runtime/functions/manage)
+[https://www.twilio.com/console/functions/manage](https://www.twilio.com/console/functions/manage)
 ````
-Click the Create a new Function icon.
+Click the big red plus `+` icon.
 In the New Function popup, click Blank and click Create.
 Set the Function name to: Group SMS
 Set the /path to: /groupsms.
@@ -39,21 +40,24 @@ Copy and paste the code from this link: [groupSms.js](groupSms.js), into the Cod
 
 Click Save.
 
-Function screen print:
+Function screen shot:
 
-<img src="ScreenPrintFunction.jpg"/>
+<img src="ScreenShotFunction.jpg"/>
 
-4. Create a Messaging Service(Twilio Copilot).
-In a new tab (keep the Function tab open), go to:
+4. Create a Messaging Service under Programmable SMS > SMS.
+
+In a new tab **(keep the Function tab open)**, go to:
 
 [https://www.twilio.com/console/sms/services](https://www.twilio.com/console/sms/services)
 ````
-Click Create new Messaging Service.
+Click the big blue plus `+` icon.
 Friendly name: GroupSMS
 Select: Notifications, 2-way
 Click Create.
-Click/enable Process Inbound Messages. For Request Url, enter your Functions URL (PATH).
-   Example: https://about-time-1235.twil.io/groupsms.
+Under Inbound Settings, select the SEND AN INCOMING_MESSAGE WEBHOOK radio button
+Go back to the Functions tab you left open and copy the PATH under Properties
+    It should look like this: https://about-time-1235.twil.io/groupsms.
+Under Request Url, paste your Functions URL (PATH)
 Click Save.
 On the left menu, click Numbers (Programmable SMS/ Messaging Services / GroupSMS / Numbers).
 Click Add an Existing Number.
@@ -62,43 +66,43 @@ Click Add Selected. Your number is now listed.
 ````
 Note, the Twilio Copilot Messaging Service has attributes you can set to control the sending of messages. For Group SMS, use the defaults.
 
-Messaging Service screen print:
+Messaging Service screen shot:
 
-<img src="ScreenPrintMS.jpg"/>
+<img src="ScreenShotMS.jpg"/>
 
 5. Create a Notify Service to broadcast group messages:
 
 [https://www.twilio.com/console/notify/services](https://www.twilio.com/console/notify/services)
 ````
-Click the Create new Notify Service icon.
+Click the big red plus `+` icon.
 Set, Friendly name: GroupSMS
 Click Create. The Notify service configuration page is displayed.
 Select your Messaging Service SID: GroupSMS.
 Click Save.
 ````
-Keep this tab open because the Notify service SID is used when configuring the Group SMS Twilio Function.
+*Keep this tab open* because the Notify service SID is used when configuring the Group SMS Twilio Function.
 
-Notify Service screen print:
+Notify Service screen shot:
 
-<img src="ScreenPrintNS.jpg"/>
+<img src="ScreenShotNS.jpg"/>
 
 6. Create a Sync Service to manage the member data:
 
 [https://www.twilio.com/console/sync/services](https://www.twilio.com/console/sync/services)
 ````
-Click the Create a new Sync Service icon.
+Click the big red plus `+` icon.
 Set, Friendly name: GroupSMS
 Click Create.
 ````
-Keep this tab open because the Sync service SID is used when configuring the Group SMS Twilio Function.
+*Keep this tab open* because the Sync service SID is used when configuring the Group SMS Twilio Function.
 
-Sync Service screen print:
+Sync Service screen shot:
 
-<img src="ScreenPrintSS.jpg"/>
+<img src="ScreenShotSS.jpg"/>
 
 7. Configure the Function to use the Sync and Notify services:
 
-[https://www.twilio.com/console/runtime/functions/configure](https://www.twilio.com/console/runtime/functions/configure)
+[https://www.twilio.com/console/functions/configure](https://www.twilio.com/console/functions/configure)
 ````
 Click/Enable ACCOUNT_SID and AUTH_TOKEN.
    This allows your Functions to use your account’s SID and auth token environment variables.
@@ -108,9 +112,9 @@ Key: SYNC_SERVICE_SID and value: your_sync_service_SID
 Click Save.
 ````
 
-Sync Service screen print:
+Sync Service screen shot:
 
-<img src="ScreenPrintSS.jpg"/>
+<img src="ScreenPrintFunctionConfig.jpg"/>
 
 ## Documentation for Developers
 
